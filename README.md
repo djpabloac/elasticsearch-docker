@@ -8,7 +8,9 @@ To use the following project first make sure you have installed [Docker](https:/
 
 In a terminal type the following command `docker --version`, then enter. The result should be like the following example `Docker version 20.10.10, build b485636`.
 
-Note: The result will be the same or different depending on the version you have installed.
+Note:
+    - The result will be the same or different depending on the version you have installed.
+    - Change the version of [Elasticsearch](https://www.elastic.co/es/elasticsearch/ "Elasticsearch") to the one you are going to use.
 
 ##### Setting
 
@@ -107,7 +109,7 @@ Note:
 
 `docker-compose up --build -d`
 
-- To stop the container: 
+- To stop the container:
 
 `docker-compose down`
 
