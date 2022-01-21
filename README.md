@@ -12,6 +12,12 @@ Note:
     - The result will be the same or different depending on the version you have installed.
     - Change the version of [Elasticsearch](https://www.elastic.co/es/elasticsearch/ "Elasticsearch") to the one you are going to use.
 
+##### Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`FOLDER_PATH`
+
 ##### Setting
 
 To not lose the data every time the container is started **[Elasticsearch](https://www.elastic.co/es/elasticsearch/ "Elasticsearch")** it is recommended to configure the file `docker-compose.yml` as follows:
@@ -34,7 +40,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - folder_path/data01:/usr/share/elasticsearch/data
+      - ${FOLDER_PATH}/data01:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
@@ -54,7 +60,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - folder_path/data02:/usr/share/elasticsearch/data
+      - ${FOLDER_PATH}/data02:/usr/share/elasticsearch/data
     networks:
       - elastic
 
@@ -69,15 +75,19 @@ networks:
     driver: bridge
 ```
 Note:
-- The value of  **"folder_path"** should be the path where the **[Elasticsearch](https://www.elastic.co/es/elasticsearch/ "Elasticsearch")** **"data"** will be stored.
+- The value of  **"FOLDER_PATH"** should be the path where the **[Elasticsearch](https://www.elastic.co/es/elasticsearch/ "Elasticsearch")** **"data"** will be stored.
 - You can add more elasticsearch containers depending on the processing they require. Adding the following syntax:
-	- Create volumen:
+
+- Create volumen:
+
 ```
     volumes:
     	data0X:
 			driver: local
 ```
-	- Create services:
+
+- Create services:
+
 ```
     es0X:
         image: elasticsearch:5.5
@@ -94,15 +104,15 @@ Note:
             soft: -1
             hard: -1
         volumes:
-          - folder_path/data0X:/usr/share/elasticsearch/data
+          - ${FOLDER_PATH}/data0X:/usr/share/elasticsearch/data
         networks:
           - elastic
 ```
 
-	es0X = name services
-	node.name =  Assign name services.
-	discovery.seed_hosts = Assign name of the other created services to balance.
-	cluster.initial_master_nodes = Assign name of all services created to balance. Modify in the other services created as well.
+- es0X = name services
+- node.name =  Assign name services.
+- discovery.seed_hosts = Assign name of the other created services to balance.
+- cluster.initial_master_nodes = Assign name of all services created to balance. Modify in - the other services created as well.
 
 ##### Execution commands
 - To run the container:
